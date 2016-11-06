@@ -191,12 +191,15 @@ def main():
 
         # 元の画像名のウインドウに表示
         cv2.imshow('source', cv2.resize(img, (128, 128)))
-        cv2.imshow(answer, cv2.resize(img, (128, 128)))
 
         cv2.moveWindow('source', 80, 20)
-        cv2.moveWindow(answer, 80 + 240 * (num_answer - 1), 240)
 
-        keycode = cv2.waitKey(100)
+        for l in (255, 192, 128, 64, 0):
+            img_ = cv2.resize(img, (128, 128))
+            img_[img_ < l] = l
+            cv2.imshow(answer, img_)
+            cv2.moveWindow(answer, 80 + 240 * (num_answer - 1), 240)
+            keycode = cv2.waitKey(30)
 
 
 main()
